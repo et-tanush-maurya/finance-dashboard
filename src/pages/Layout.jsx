@@ -7,20 +7,15 @@ import {
   Grid3X3,
   Settings,
   ChevronDown,
-  SplitSquareVertical,
   FileText,
   Menu,
   X,
   User,
   LogOut,
   Users,
-  FlaskConical,
-  Building2,
-  AlertTriangle
+  Building2
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Switch } from '@/components/ui/switch';
-import { Slider } from '@/components/ui/slider';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,10 +23,8 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
-import { useSplitRatio } from '../contexts/SplitRatioContext';
-import { CLIENTS } from '../components/data/mockData';
-import { formatCurrency, formatCompactNumber } from '../components/utils/formatters';
 import Logo from '../assets/logos/UAEKYC LOGO BlacK.svg';
+import KElement from '../assets/UAEKYC LOGO Element.svg';
 
 const navItems = [
   {
@@ -69,14 +62,6 @@ export default function Layout({ children, currentPageName }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [reportsOpen, setReportsOpen] = useState(false);
   const location = useLocation();
-  const {
-    activeSplit,
-    simulatedSplit,
-    isSimulationMode,
-    toggleSimulation,
-    updateSimulatedSplit
-  } = useSplitRatio();
-
   const isActive = (page) => {
     return currentPageName === page;
   };
@@ -98,15 +83,15 @@ export default function Layout({ children, currentPageName }) {
       {/* Sidebar */}
       <aside className={`
         fixed inset-y-0 left-0 z-50
-        w-72 xl:w-64 h-screen bg-white/80 backdrop-blur-xl border-r border-gray-100
+        w-72 xl:w-64 h-screen bg-gray-950 backdrop-blur-xl border-r border-gray-800
         transform transition-transform duration-300 ease-out shadow-xl lg:shadow-none overflow-hidden
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
         <div className="h-full flex flex-col overflow-hidden">
           {/* Logo */}
-          <div className="h-20 flex items-center  px-6 border-b border-gray-100">
+          <div className="h-20 flex items-center px-6 border-b border-gray-800">
             <Link to={createPageUrl('Dashboard')} className="flex items-center group">
-              <img src={Logo} alt="UAEKYC Logo" className="h-8 w-auto" />
+              <img src={Logo} alt="UAEKYC Logo" className="h-8 w-auto invert brightness-200" />
             </Link>
             {/* <button
               className="lg:hidden p-1 hover:bg-gray-100"
@@ -127,8 +112,8 @@ export default function Layout({ children, currentPageName }) {
                       w-full flex items-center justify-between px-4 py-3 text-sm font-semibold rounded-xl
                       transition-all duration-200
                       ${isReportsActive()
-                        ? 'bg-gray-100 text-gray-900 shadow-sm'
-                        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                        ? 'bg-gray-800 text-white shadow-sm'
+                        : 'text-gray-400 hover:bg-gray-800/60 hover:text-white'
                       }
                     `}
                   >
@@ -139,7 +124,7 @@ export default function Layout({ children, currentPageName }) {
                     <ChevronDown className={`w-4 h-4 transition-transform ${reportsOpen ? 'rotate-180' : ''}`} />
                   </button>
                   {reportsOpen && (
-                  <div className="mt-2 ml-4 pl-4 border-l-2 border-gray-200 space-y-1">
+                  <div className="mt-2 ml-4 pl-4 border-l-2 border-gray-700 space-y-1">
                       {item.children.map((child) => (
                         <Link
                           key={child.page}
@@ -147,8 +132,8 @@ export default function Layout({ children, currentPageName }) {
                           className={`
                             flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-200
                             ${isActive(child.page)
-                              ? 'bg-gray-900 text-white shadow-lg'
-                              : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                              ? 'bg-white text-gray-900 shadow-lg'
+                              : 'text-gray-400 hover:bg-gray-800/60 hover:text-white'
                             }
                           `}
                         >
@@ -166,8 +151,8 @@ export default function Layout({ children, currentPageName }) {
                   className={`
                     flex items-center gap-3 px-4 py-3 text-sm font-semibold rounded-xl transition-all duration-200
                     ${isActive(item.page)
-                      ? 'bg-gray-900 text-white shadow-lg'
-                      : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                      ? 'bg-white text-gray-900 shadow-lg'
+                      : 'text-gray-400 hover:bg-gray-800/60 hover:text-white'
                     }
                   `}
                 >
@@ -178,87 +163,17 @@ export default function Layout({ children, currentPageName }) {
             ))}
           </nav>
 
-          {/* Split Ratio Section */}
-          <div className="px-4 py-4 border-t border-gray-200">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <SplitSquareVertical className="w-4 h-4 text-gray-500" />
-                <span className="text-xs font-medium text-gray-500 uppercase">ICP Share</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <FlaskConical className={`w-3.5 h-3.5 ${isSimulationMode ? 'text-amber-500' : 'text-gray-400'}`} />
-                <Switch
-                  checked={isSimulationMode}
-                  onCheckedChange={toggleSimulation}
-                  className="scale-75"
-                />
-              </div>
-            </div>
-
-            <div className="bg-gray-50 rounded-xl p-3 space-y-2">
-              {(() => {
-                const totalRevenue = CLIENTS.reduce((sum, c) => sum + c.revenue, 0);
-                const icpRevenue = Math.round((totalRevenue * (activeSplit.icp / 100)) * 100) / 100;
-                const activeClients = CLIENTS.filter(c => c.status === 'active').length;
-                return (
-                  <>
-                    <div className="flex items-center justify-between">
-                      <span className="text-[11px] text-gray-500">My Split</span>
-                      <span className="text-sm font-bold text-gray-900">{activeSplit.icp.toFixed(0)}%</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-[11px] text-gray-500">Total Revenue</span>
-                      <span className="text-sm font-semibold text-gray-900">{formatCompactNumber(totalRevenue)}</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-[11px] text-gray-500">My Revenue</span>
-                      <span className="text-sm font-semibold text-gray-900">{formatCompactNumber(icpRevenue)}</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      {/* <span className="text-[11px] text-gray-500">Active Clients</span> */}
-                      {/* <span className="text-sm font-semibold text-gray-900">{activeClients}</span> */}
-                    </div>
-                  </>
-                );
-              })()}
-
-              {isSimulationMode && (
-                <div className="pt-2 border-t border-gray-200">
-                  <Slider
-                    value={[simulatedSplit.icp]}
-                    onValueChange={(value) => updateSimulatedSplit(value[0])}
-                    max={100}
-                    min={0}
-                    step={1}
-                    className="w-full"
-                  />
-                  <div className="flex justify-between text-[10px] text-gray-400 mt-1">
-                    <span>0%</span>
-                    <span>50%</span>
-                    <span>100%</span>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {isSimulationMode && (
-              <p className="text-[10px] text-amber-600 mt-2 text-center">
-                Simulation Mode Active
-              </p>
-            )}
-          </div>
-
           {/* Profile at bottom */}
-          <div className="p-4 border-t border-gray-200">
+          <div className="p-4 border-t border-gray-800">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="w-full flex items-center gap-3 text-sm text-gray-700 hover:bg-gray-50 rounded-xl px-3 py-2 justify-start">
-                  <div className="w-9 h-9 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl flex items-center justify-center">
-                    <User className="w-4 h-4 text-gray-600" />
+                <Button variant="ghost" className="w-full flex items-center gap-3 text-sm text-gray-300 hover:bg-gray-800/60 hover:text-white rounded-xl px-3 py-2 justify-start">
+                  <div className="w-9 h-9 bg-gradient-to-br from-gray-700 to-gray-800 rounded-xl flex items-center justify-center">
+                    <User className="w-4 h-4 text-gray-300" />
                   </div>
                   <div className="flex-1 text-left">
-                    <span className="font-medium">Admin</span>
-                    <p className="text-xs text-gray-400">admin@icp.ae</p>
+                    <span className="font-medium text-gray-200">Admin</span>
+                    <p className="text-xs text-gray-500">admin@icp.ae</p>
                   </div>
                   <ChevronDown className="w-4 h-4" />
                 </Button>
@@ -291,20 +206,15 @@ export default function Layout({ children, currentPageName }) {
           </button>
         </div>
 
-        {/* Simulation Banner */}
-        {isSimulationMode && (
-          <div className="bg-amber-50 border-b border-amber-200 px-4 py-2">
-            <div className="flex items-center justify-center gap-2 text-sm text-amber-800">
-              <AlertTriangle className="w-4 h-4" />
-              <span className="font-medium">Simulation Mode:</span>
-              <span>Data shown reflects simulated split ratio ({activeSplit.icp}% / {activeSplit.dalil}%). This is not actual data.</span>
-            </div>
-          </div>
-        )}
-
         {/* Page content */}
-        <main className="flex-1 p-6 lg:p-8 xl:p-10 overflow-auto">
-          <div className="w-full">
+        <main className="flex-1 p-6 lg:p-8 xl:p-10 overflow-auto relative">
+          <img
+            src={KElement}
+            alt=""
+            aria-hidden="true"
+            className="fixed bottom-[-40px] right-[-20px] w-[340px] h-auto opacity-[0.04] pointer-events-none select-none"
+          />
+          <div className="w-full relative z-10">
             {children}
           </div>
         </main>

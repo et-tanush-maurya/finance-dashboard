@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import {
   UserPlus,
-  Mail,
-  Shield,
+  Users,
+  UserCheck,
+  ShieldCheck,
+  UserCog,
   MoreVertical,
   Edit,
   Trash2
 } from 'lucide-react';
+import StatCard from '../components/common/StatCard';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
@@ -242,41 +245,31 @@ export default function UserManagement() {
       </div>
 
       {/* User Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card className="border-gray-200">
-          <CardContent className="p-5">
-            <p className="text-sm text-gray-500">Total Users</p>
-            <p className="text-2xl font-semibold text-gray-900 mt-1">{users.length}</p>
-          </CardContent>
-        </Card>
-        <Card className="border-gray-200">
-          <CardContent className="p-5">
-            <p className="text-sm text-gray-500">Active Users</p>
-            <p className="text-2xl font-semibold text-gray-900 mt-1">
-              {users.filter(u => u.status === 'Active').length}
-            </p>
-          </CardContent>
-        </Card>
-        <Card className="border-gray-200">
-          <CardContent className="p-5">
-            <p className="text-sm text-gray-500">Finance Admin</p>
-            <p className="text-2xl font-semibold text-gray-900 mt-1">
-              {users.filter(u => u.role === 'FinanceAdmin').length}
-            </p>
-          </CardContent>
-        </Card>
-        <Card className="border-gray-200">
-          <CardContent className="p-5">
-            <p className="text-sm text-gray-500">Finance User</p>
-            <p className="text-2xl font-semibold text-gray-900 mt-1">
-              {users.filter(u => u.role === 'FinanceUser').length}
-            </p>
-          </CardContent>
-        </Card>
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        <StatCard
+          title="Total Users"
+          value={users.length}
+          icon={Users}
+        />
+        <StatCard
+          title="Active Users"
+          value={users.filter(u => u.status === 'Active').length}
+          icon={UserCheck}
+        />
+        <StatCard
+          title="Finance Admin"
+          value={users.filter(u => u.role === 'FinanceAdmin').length}
+          icon={ShieldCheck}
+        />
+        <StatCard
+          title="Finance User"
+          value={users.filter(u => u.role === 'FinanceUser').length}
+          icon={UserCog}
+        />
       </div>
 
       {/* Users Table */}
-      <Card className="border-0 shadow-sm">
+      <Card className="border-0 shadow-sm border-t-4 border-t-[#F5CA23]">
         <CardContent className="p-0">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">

@@ -63,7 +63,7 @@ export default function DataTable({
   };
 
   return (
-    <div className={`bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden ${className}`}>
+    <div className={`bg-white rounded-2xl shadow-sm border border-gray-100 border-t-4 border-t-[#F5CA23] overflow-hidden ${className}`}>
       <div className="overflow-x-auto w-full">
         <table className="w-full min-w-max">
           <thead>

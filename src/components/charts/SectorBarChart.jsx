@@ -28,7 +28,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 export default function SectorBarChart({ data, title }) {
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 border-t-4 border-t-[#F5CA23] p-8">
       {title && (
         <h3 className="text-base font-bold text-gray-900 mb-6">
           {title}

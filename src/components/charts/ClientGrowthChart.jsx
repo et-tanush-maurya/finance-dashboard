@@ -21,7 +21,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 export default function ClientGrowthChart({ data, title = "Client Growth" }) {
   return (
-    <Card className="border-0 shadow-sm">
+    <Card className="border-0 shadow-sm border-t-4 border-t-[#F5CA23]">
       <CardContent className="p-6">
         <h3 className="text-base font-semibold text-gray-900 mb-4">{title}</h3>
 

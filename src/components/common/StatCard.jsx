@@ -1,5 +1,6 @@
 import React from 'react';
 import { TrendingUp, TrendingDown } from 'lucide-react';
+import KElement from '../../assets/UAEKYC LOGO Element.svg';
 
 export default function StatCard({
   title,
@@ -21,8 +22,14 @@ export default function StatCard({
   };
 
   return (
-    <div className={`group relative bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border min-h-[160px] ${variantStyles[variant]} ${className}`}>
-      <div className="flex items-start justify-between gap-4 h-full">
+    <div className={`group relative bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border-l-4 border-l-[#F5CA23] border border-gray-100 min-h-[160px] overflow-hidden ${variantStyles[variant]} ${className}`}>
+      <img
+        src={KElement}
+        alt=""
+        aria-hidden="true"
+        className="absolute -bottom-4 -right-3 w-24 h-auto opacity-[0.04] group-hover:opacity-[0.08] transition-opacity duration-300 pointer-events-none select-none"
+      />
+      <div className="relative flex items-start justify-between gap-4 h-full">
         <div className="flex-1 min-w-0 flex flex-col">
           <p className="text-xs font-semibold tracking-wider text-gray-400 uppercase mb-3">
             {title}
@@ -50,8 +57,8 @@ export default function StatCard({
           )}
         </div>
         {Icon && (
-          <div className="flex-shrink-0 p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl group-hover:scale-110 transition-transform duration-300">
-            <Icon className="w-5 h-5 text-gray-700" strokeWidth={1.5} />
+          <div className="flex-shrink-0 p-3 bg-gradient-to-br from-[#F5CA23]/10 to-[#F6AB29]/15 rounded-xl group-hover:scale-110 transition-transform duration-300">
+            <Icon className="w-5 h-5 text-[#464646]" strokeWidth={1.5} />
           </div>
         )}
       </div>

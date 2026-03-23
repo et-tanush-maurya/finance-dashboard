@@ -9,7 +9,7 @@ import {
 } from 'lucide-react';
 import StatCard from '../components/common/StatCard';
 import RevenueLineChart from '../components/charts/RevenueLineChart';
-import SectorBarChart from '../components/charts/SectorBarChart';
+import SectorRadialChart from '../components/charts/SectorRadialChart';
 import SplitDonutChart from '../components/charts/SplitDonutChart';
 import ModuleRevenueChart from '../components/charts/ModuleRevenueChart';
 import TopClientsTable from '../components/charts/TopClientsTable';
@@ -141,7 +141,7 @@ export default function Dashboard() {
           data={MONTHLY_REVENUE}
           title="Revenue Trend"
         />
-        <SectorBarChart
+        <SectorRadialChart
           data={SECTOR_DATA}
           title="Sector-wise Revenue"
         />

@@ -7,7 +7,7 @@ import { createPageUrl } from '../../pages/utils';
 
 export default function TopClientsTable({ clients, title = "Top Clients by Revenue", activeSplit }) {
   return (
-    <Card className="border-0 shadow-sm">
+    <Card className="border-0 shadow-sm border-t-4 border-t-[#F5CA23]">
       <CardContent className="p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-base font-semibold text-gray-900">{title}</h3>
