@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import StatCard from '../components/common/StatCard';
 import DataTable from '../components/common/DataTable';
 import FilterDropdown from '../components/common/FilterDropdown';
-import SectorBarChart from '../components/charts/SectorBarChart';
+import SectorDoublePieChart from '../components/charts/SectorDoublePieChart';
 import { 
   CLIENTS, 
   SECTORS, 
@@ -215,8 +215,8 @@ export default function SectorAnalytics() {
       />
 
       {/* Chart */}
-      <SectorBarChart 
-        data={SECTOR_DATA} 
+      <SectorDoublePieChart
+        data={SECTOR_DATA}
         title="Revenue by Sector"
       />
 

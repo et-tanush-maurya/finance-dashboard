@@ -12,8 +12,8 @@ import {
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import FilterDropdown from '../components/common/FilterDropdown';
-import ModuleBarChart from '../components/charts/ModuleBarChart';
-import RevenueLineChart from '../components/charts/RevenueLineChart';
+import ModuleRingsChart from '../components/charts/ModuleRingsChart';
+import MonthlyTrendRadialChart from '../components/charts/MonthlyTrendRadialChart';
 import {
   CLIENTS,
   generateClientModuleData,
@@ -415,8 +415,8 @@ export default function ClientProfile() {
 
       {/* Charts */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-        <ModuleBarChart data={moduleData} title="Module Distribution" />
-        <RevenueLineChart data={monthlyTrend} title="Monthly Trend" />
+        <ModuleRingsChart data={moduleData} title="Module Distribution" />
+        <MonthlyTrendRadialChart data={monthlyTrend} title="Monthly Trend" />
       </div>
     </div>
   );

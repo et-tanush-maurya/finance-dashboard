@@ -8,7 +8,7 @@ import {
   Receipt
 } from 'lucide-react';
 import StatCard from '../components/common/StatCard';
-import RevenueLineChart from '../components/charts/RevenueLineChart';
+import RevenueRadarChart from '../components/charts/RevenueRadarChart';
 import SectorRadialChart from '../components/charts/SectorRadialChart';
 import SplitDonutChart from '../components/charts/SplitDonutChart';
 import ModuleRevenueChart from '../components/charts/ModuleRevenueChart';
@@ -137,9 +137,9 @@ export default function Dashboard() {
 
       {/* Main Charts */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-        <RevenueLineChart
+        <RevenueRadarChart
           data={MONTHLY_REVENUE}
-          title="Revenue Trend"
+          title="6-Month Revenue Trend"
         />
         <SectorRadialChart
           data={SECTOR_DATA}
