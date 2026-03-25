@@ -56,7 +56,7 @@ export default function DateRangePicker({ dateRange, onDateRangeChange, classNam
         <Button
           variant="outline"
           className={cn(
-            "w-[160px] sm:w-[200px] justify-start text-left font-normal border-gray-200 hover:bg-gray-50 rounded-xl",
+            "w-[160px] sm:w-[200px] h-10 justify-start text-left font-normal border-gray-200 hover:bg-gray-50 rounded-xl",
             !dateRange?.from && "text-muted-foreground",
             className
           )}

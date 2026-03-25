@@ -65,7 +65,7 @@ export default function DataTable({
   return (
     <div className={`bg-white rounded-2xl shadow-sm border border-gray-100 border-t-4 border-t-[#F5CA23] overflow-hidden ${className}`}>
       <div className="overflow-x-auto w-full">
-        <table className="w-full min-w-max">
+        <table className="w-full table-fixed">
           <thead>
             <tr className="border-b border-gray-100">
               {columns.map((col) => (
@@ -99,7 +99,7 @@ export default function DataTable({
                 onClick={() => onRowClick && onRowClick(row)}
               >
                 {columns.map((col) => (
-                  <td key={col.key} className="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
+                  <td key={col.key} className="px-6 py-4 text-sm text-gray-700 truncate">
                     {col.render ? col.render(row[col.key], row) : row[col.key]}
                   </td>
                 ))}

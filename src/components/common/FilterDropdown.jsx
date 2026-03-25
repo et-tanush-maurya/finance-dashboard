@@ -23,7 +23,7 @@ export default function FilterDropdown({
         </label>
       )}
       <Select value={value} onValueChange={onChange}>
-        <SelectTrigger className="h-11 bg-white border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-gray-100 focus:border-gray-900 min-w-[160px]">
+        <SelectTrigger className="h-10 bg-white border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-gray-100 focus:border-gray-900 min-w-[160px]">
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>

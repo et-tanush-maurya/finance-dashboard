@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useMemo, useCallback } from 'react';
-import { DEFAULT_SPLIT_RATIO } from '../components/data/mockData';
+import { DEFAULT_SPLIT_RATIO } from '@/data/mockData';
 
 const SplitRatioContext = createContext(null);
 

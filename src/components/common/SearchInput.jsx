@@ -16,7 +16,7 @@ export default function SearchInput({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="pl-11 h-11 bg-white border-gray-200 focus:border-gray-900 focus:ring-2 focus:ring-gray-100 rounded-xl shadow-sm"
+        className="pl-11 h-10 bg-white border-gray-200 focus:border-gray-900 focus:ring-2 focus:ring-gray-100 rounded-xl shadow-sm"
       />
     </div>
   );
